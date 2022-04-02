@@ -5,8 +5,9 @@ import { useSelector, useDispatch } from "react-redux"
 import { clearErrors, getProduct } from "../../actions/productAction";
 import Loader from "../layout/Loader/Loader";
 import Product from '../Home/Product';
-import Typography from "@material-ui/core"
-import Slider from "@material-ui/core"
+import Typography from "@material-ui/core/Typography"
+import Slider from "@material-ui/core/Slider"
+import { useAlert } from "react-alert"
 import Pagination from "react-js-pagination"
 
 
@@ -23,6 +24,7 @@ const categories = [
 const Products = () => {
 
     const dispatch = useDispatch();
+    const alert = useAlert();
     const [currentPage, setCurrentPage] = useState(1)
     const [price, setPrice] = useState([0, 25000])
     const [category, setCategory] = useState("");
@@ -37,8 +39,14 @@ const Products = () => {
         setPrice(newPrice);
     };
     useEffect(() => {
-        dispatch(getProduct(keyword, resultPerPage, price, category));
-    }, [dispatch, keyword, currentPage, price, category]);
+        if (error) {
+            alert.error(error);
+            dispatch(clearErrors());
+
+
+        }
+        dispatch(getProduct(keyword, resultPerPage, price, category, ratings));
+    }, [dispatch, keyword, currentPage, price, category, ratings, error, alert]);
 
     let count = filteredProductsCount;
     return (
@@ -93,9 +101,10 @@ const Products = () => {
                         <Slider
                             value={ratings}
                             onChange={(e, newRating) => {
-                                setRating(newRating);
+                                setRatings(newRating);
                             }}
                             aria-labelledby="continuous-slider"
+                            valueLabelDisplay="auto"
                             min={0}
                             max={5}
                         />
