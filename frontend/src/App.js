@@ -8,6 +8,7 @@ import Home from "./component/Home/Home.js"
 import ProductDetails from "./component/Product/ProductDetails"
 import Products from "./component/Product/Products.js"
 import Search from "./component/Product/Search.js"
+import LoginSignup from './component/User/LoginSignup';
 
 
 
@@ -28,6 +29,7 @@ function App() {
         <Route exact path="/products" element={<Products />} />
         <Route path="/products/:keyword" element={<Products />} />
         <Route exact path="/search" element={<Search />} />
+        <Route exact path="/login" element={<LoginSignup />} />
       </Routes>
       <Footer />
     </Router>

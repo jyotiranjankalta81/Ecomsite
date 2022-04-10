@@ -25,6 +25,7 @@ const options = {
   nav4justifyContent: "flex-start",
   link1ColorHover: "#eb4034",
   link1Margin: "1vmax",
+  profileIconUrl: "/login",
   link3Margin: "0",
   link4Margin: "1vmax",
   profileIconColor: "rgba(35,35,35,0.8)",
